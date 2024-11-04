@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { TextInput, Button, View, StyleSheet } from 'react-native';
 
 function ToDoForm({ addTask }) {
-  const [task, setTask] = useState('');
+  const [taskText, setTaskText] = useState('');
 
   const handleAddTask = () => {
-    if (task.trim()) {
-      addTask(task);
-      setTask('');
+    if (taskText.trim()) {
+      addTask(taskText);
+      setTaskText(''); // Clear input after adding the task
     }
   };
 
@@ -15,9 +15,9 @@ function ToDoForm({ addTask }) {
     <View style={styles.formContainer}>
       <TextInput
         style={styles.input}
-        placeholder="New Task"
-        value={task}
-        onChangeText={setTask}
+        placeholder="Add a new task..."
+        onChangeText={(text) => setTaskText(text)}
+        value={taskText}
       />
       <Button title="Add Task" onPress={handleAddTask} />
     </View>
@@ -26,16 +26,18 @@ function ToDoForm({ addTask }) {
 
 const styles = StyleSheet.create({
   formContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     padding: 20,
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderColor: '#ddd',
   },
   input: {
-    flex: 1,
-    borderWidth: 1,
+    height: 40,
     borderColor: '#ccc',
-    padding: 10,
-    marginRight: 10,
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 8,
+    borderRadius: 5,
   },
 });
 
